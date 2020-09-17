@@ -1,4 +1,9 @@
-#### py文件用途介绍
+11111
+# spider_PDB
+爬取PDB文件以及相关信息，还不会Markdown，随便写写
+
+# py文件用途介绍
+
 spider.py 爬取下载链接和目标名称，存入pdb文件夹
 download.py 将爬取到的cif压缩包下载到pdb/pdb_zip文件夹
 unzip.py 将下载好的压缩包解压到pdb/pdb_cif文件夹
@@ -48,6 +53,7 @@ Literature可用信息
 	初拟标题
 	作者
 初步想法：谷歌学术搜索初拟标题，再以作者定位
+
 
 # 一些有用的信息
 NAME
