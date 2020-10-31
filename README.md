@@ -1,9 +1,10 @@
 # py文件用途介绍
-spider.py 爬取下载链接和目标名称，存入pdb文件夹
-download.py 将爬取到的cif压缩包下载到pdb/pdb_zip文件夹
-unzip.py 将下载好的压缩包解压到pdb/pdb_cif文件夹
-excelDOI.py 将每个蛋白对应的doi号放到excel里
-getIF.py 根据doi号获取文献的一些信息
+spider.py 爬取下载链接和目标名称，存入pdb文件夹  
+download.py 将爬取到的cif压缩包下载到pdb/pdb_zip文件夹  
+unzip.py 将下载好的压缩包解压到pdb/pdb_cif文件夹  
+excelDOI.py 将每个蛋白对应的doi号放到excel里  
+getIF.py 根据doi号获取文献的一些信息  
+editExcel.py 删除重复数据
 
 
 # pdb下载链接
