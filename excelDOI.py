@@ -85,6 +85,12 @@ if __name__ == '__main__':
 
         #设置第二列宽度
         sheet.col(1).width = 256*32
+        xls.save('PDB_Excel.xls')
+        data = xlrd.open_workbook('PDB_Excel.xls',formatting_info=True)
+        excel = copy(wb=data) # 完成xlrd对象向xlwt对象转换
+        sheet = excel.get_sheet(0) # 获得要操作的页
+        table = data.sheet_by_index(0)
+
     else:
         data = xlrd.open_workbook('PDB_Excel.xls',formatting_info=True)
         excel = copy(wb=data) # 完成xlrd对象向xlwt对象转换

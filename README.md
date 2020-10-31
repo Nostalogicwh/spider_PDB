@@ -1,27 +1,26 @@
-11111
-# spider_PDB
-爬取PDB文件以及相关信息，还不会Markdown，随便写写
-
 # py文件用途介绍
-
 spider.py 爬取下载链接和目标名称，存入pdb文件夹
 download.py 将爬取到的cif压缩包下载到pdb/pdb_zip文件夹
 unzip.py 将下载好的压缩包解压到pdb/pdb_cif文件夹
+excelDOI.py 将每个蛋白对应的doi号放到excel里
+getIF.py 根据doi号获取文献的一些信息
+
 
 # pdb下载链接
 http://files.rcsb.org/download/5WYB.pdb
 
+# cif文件DOI部分不全
+配合pdb库里的数据进行补全
+
 # 没有DOI
 to be published 可能已经发表
-
-
-# cif文件DOI部分不全
+手动搜索是否发表，填补doi号
 
 # 一些问题
+chromedriver版本要和浏览器版本匹配
 cif文件中DOI 和 PDB网站中DOI不匹配 补全处理
 大部分DOI可以用web of science获取信息，部分信息不全用letpub获取，还有部分web of science未收录，需手动处理
 多个蛋白质发一篇文章，手动合并 
-
 
 # 链接： 	搜索条件
 # 		diffraction source synchrotron site: SSRF or NFPSS
@@ -48,18 +47,11 @@ cif str
 http://apps.webofknowledge.com/UA_GeneralSearch_input.do?SID=5Ck7klrD2lnfZN1noaZ&product=UA&search_mode=GeneralSearch
 http://apps.webofknowledge.com/Search.do?product=UA&SID=5Ck7klrD2lnfZN1noaZ&search_mode=GeneralSearch&prID=b993fdd0-f5dd-4b4d-aab6-c2f8443cf4ee
 
-# 解决To be published问题
-Literature可用信息
-	初拟标题
-	作者
-初步想法：谷歌学术搜索初拟标题，再以作者定位
-
-
 # 一些有用的信息
 NAME
-DOI 			_citation.pdbx_database_id_DOI
-Method 			_exptl_crystal_grow.method
-pH 				_exptl_crystal_grow.pH
-Temperature 	_exptl_crystal_grow.temp
-Details 		_exptl_crystal_grow.pdbx_details
-Classification	_struct_keywords.pdbx_keywords
+DOI 			\_citation.pdbx_database_id_DOI
+Method 			\_exptl_crystal_grow.method
+pH 				\_exptl_crystal_grow.pH
+Temperature 	\_exptl_crystal_grow.temp
+Details 		\_exptl_crystal_grow.pdbx_details
+Classification	\_struct_keywords.pdbx_keywords

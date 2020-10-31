@@ -10,6 +10,9 @@ excel_table = excel.get_sheet(0) # 获得要操作的页
 table = data.sheet_by_index(0)
 nrows = table.nrows # 为行数，整形
 
+
+# 先手动筛选出没有重复的DOI号，然后将还有DOI号的数据复制到对应位置后面，半手动完成去重
+# =IF(COUNTIF($A$1:A1,A1)=1,A1,""),计数次数为1则显示单元格，否则为空
 pbar = ProgressBar()
 for i in pbar(range(nrows)):
     if i == 0:
