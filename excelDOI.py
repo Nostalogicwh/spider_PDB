@@ -8,7 +8,7 @@ from xlutils.copy import copy
 from selenium import webdriver
 
 #网页读取DOI并写入Excel
-def getDOI(i,pdbname,url):
+def getDOI(i,url):
 
     driver.get(url)
     try:
@@ -16,12 +16,10 @@ def getDOI(i,pdbname,url):
         DOI = driver.find_element_by_xpath('//*[@id="pubmedDOI"]/a').text
 
         #写入Excel
-        sheet.write(i+1,0,pdbname)
         sheet.write(i+1,1,DOI)
     except:
-        sheet.write(i+1,0,pdbname)
         sheet.write(i+1,1,'To be published')
-    excel.save('PDB_Excel.xls')
+    excel.save('PDB_Excel_Diamond.xls')
 
 #cif文件读取DOI写入Excel
 def getDOI_2(i,file_name):
@@ -52,7 +50,7 @@ def replace():
         doi_1 = table.cell(i+1,1).value
         doi_2 = table.cell(i+1,2).value
 
-        if doi_1 == 'None':
+        if doi_1 == 'To be published':
             if len(doi_2) > 4:
                 sheet.write(i,1,doi_2)
             else:
@@ -70,10 +68,10 @@ if __name__ == '__main__':
     #文件夹路径
     path = "http://www.rcsb.org/structure/"
     #cif文件名
-    namelist = pd.read_table('./pdb/pdb_name.txt',header = None)
+    namelist = pd.read_table('./pdb/pdb_name_Diamond.txt',header = None)
 
     #判断是否存在该Excel文件
-    isExists=os.path.exists('./PDB_Excel.xls')
+    isExists=os.path.exists('./PDB_Excel_Diamond.xls')
     if not isExists:
         #创建Excel对象
         xls=xlwt.Workbook(encoding='utf-8')
@@ -85,14 +83,14 @@ if __name__ == '__main__':
 
         #设置第二列宽度
         sheet.col(1).width = 256*32
-        xls.save('PDB_Excel.xls')
-        data = xlrd.open_workbook('PDB_Excel.xls',formatting_info=True)
+        xls.save('PDB_Excel_Diamond.xls')
+        data = xlrd.open_workbook('PDB_Excel_Diamond.xls',formatting_info=True)
         excel = copy(wb=data) # 完成xlrd对象向xlwt对象转换
         sheet = excel.get_sheet(0) # 获得要操作的页
         table = data.sheet_by_index(0)
 
     else:
-        data = xlrd.open_workbook('PDB_Excel.xls',formatting_info=True)
+        data = xlrd.open_workbook('PDB_Excel_Diamond.xls',formatting_info=True)
         excel = copy(wb=data) # 完成xlrd对象向xlwt对象转换
         sheet = excel.get_sheet(0) # 获得要操作的页
         table = data.sheet_by_index(0)
@@ -112,18 +110,28 @@ if __name__ == '__main__':
         pdbName = Name.replace(".cif.gz","")
         
         file_name = Name.replace(".gz","")
-        #拼接路径
+
         url = path + pdbName
+        sheet.write(i + 1, 0, pdbName)
+        print(i)
+        try:
+            if table.cell(i+1,1).value == '':
+                getDOI(i, url)
+                # 拼接路径
+                file_name = "./pdb/pdb_cif_Diamond/" + file_name
+                getDOI_2(i, file_name)
+            else:
+                continue
+        except:
+            getDOI(i, url)
+            # 拼接路径
+            file_name = "./pdb/pdb_cif_Diamond/" + file_name
+            getDOI_2(i, file_name)
 
-        getDOI(i,pdbName,url)
-
-        file_name = "./pdb/pdb_cif/" + file_name
-        
-        getDOI_2(i,file_name)
-
+    replace()
     delete()
 
 
 
     #保存
-    excel.save('PDB_Excel.xls')
+    excel.save('PDB_Excel_Diamond.xls')

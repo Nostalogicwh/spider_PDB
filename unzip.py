@@ -1,17 +1,13 @@
 import spider
 import os
 import gzip
-import shutil
-import numpy as np
 import pandas as pd
-from glob import glob
-import sys
 from progressbar import ProgressBar
 
 def ungz(path,filename):
 
     #存储路径
-    path_gz = ".\\pdb\\pdb_cif\\"
+    path_gz = ".\\pdb\\pdb_cif_APS\\"
     #去掉后缀
     f_name = filename.replace(".gz","")
 
@@ -29,13 +25,13 @@ def ungz(path,filename):
 if __name__ == "__main__":
 
     #压缩文件夹路径
-    path = ".\\pdb\\pdb_zip"
+    path = ".\\pdb\\pdb_zip_APS"
     #创建文件夹
-    make_path = ".\\pdb\\pdb_cif"
+    make_path = ".\\pdb\\pdb_cif_APS"
     spider.makedir(make_path)
 
     #获取文件名 dataframe
-    zip_namelist = pd.read_table('./pdb/pdb_name.txt',header = None)
+    zip_namelist = pd.read_table('./pdb/pdb_name_APS.txt',header = None)
 
     pbar = ProgressBar()
     for i in pbar(range(len(zip_namelist))):

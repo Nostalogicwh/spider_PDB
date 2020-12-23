@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import xlwt
 import xlrd 
 from xlutils.copy import copy 
 from progressbar import ProgressBar
@@ -65,12 +64,12 @@ def getDetails(i,DOI):
         excel_table.write(i,9,JCR_part)
 
         excel_table.write(i,10,'Web of Science')
-        excel.save('PDB_Excel.xls')
+        excel.save('PDB_Excel_Diamond.xls')
     except:
         #Title
         print('NoIF')
         excel_table.write(i,10,'Letpub')
-        excel.save('PDB_Excel.xls')
+        excel.save('PDB_Excel_Diamond.xls')
 
 
 #获取DOI
@@ -116,7 +115,7 @@ if __name__ == '__main__':
     driver.find_element_by_xpath('/html/body/span[27]/span/span[1]/input').send_keys(Keys.ENTER)
 
 
-    data = xlrd.open_workbook('PDB_Excel.xls',formatting_info=True)
+    data = xlrd.open_workbook('PDB_Excel_Diamond.xls',formatting_info=True)
     excel = copy(wb=data) # 完成xlrd对象向xlwt对象转换
     excel_table = excel.get_sheet(0) # 获得要操作的页
 
@@ -149,17 +148,14 @@ if __name__ == '__main__':
             else:
                 continue
     
-    #从letpub获取数据
-    #pbar = ProgressBar()
-    #for i in pbar(range(nrows)):
-    #    if i == 0:
-    #        continue
-    #    else:
-    #        if table.cell(i,10).value == "Letpub":
-    #            journal_name = table.cell(i,3).value
-    #            getDOI_letpub(journal_name)
-    #        else:
-    #            continue
+    # #从letpub获取数据
+    # pbar = ProgressBar()
+    # for i in pbar(range(1, nrows)):
+    #     if table.cell(i,10).value == "Letpub":
+    #         journal_name = table.cell(i,3).value
+    #         getDOI_letpub(journal_name)
+    #     else:
+    #         continue
     
 
-    excel.save('PDB_Excel.xls')
+    excel.save('PDB_Excel_Diamond.xls')

@@ -1,10 +1,10 @@
-import numpy as np
-import pandas as pd
 import os
 import urllib.request
-import time
-import spider
+
+import pandas as pd
 from progressbar import ProgressBar
+
+import spider
 
 
 def download():
@@ -12,11 +12,11 @@ def download():
     下载cif文件到指定路径
     '''
     #路径
-    path = "./pdb/pdb_zip/"
+    path = "./pdb/pdb_zip_APS/"
     #获取下载路径
-    download_linklist = pd.read_table('./pdb/pdb_cif.txt',header = None)
+    download_linklist = pd.read_table('./pdb/pdb_cif_APS.txt',header = None)
     #获取文件名 dataframe
-    download_namelist = pd.read_table('./pdb/pdb_name.txt',header = None)
+    download_namelist = pd.read_table('./pdb/pdb_name_APS.txt',header = None)
     pbar = ProgressBar()
     for i in pbar(range(len(download_linklist))):
                 
@@ -29,21 +29,15 @@ def download():
         urlName = "".join(name_list[i]) #list > str
         # 判断路径是否存在，不存在则下载
         isExists=os.path.exists(path+urlName)
-        #try:
-        #    if not isExists:
-        #        #print('正在下载第' + str(i) + '个')
-        #        urllib.request.urlretrieve(urlList,filename=path+urlName)
-        #    else:
-        #        #print('文件已存在')
-        #        pass
-        #except:
-        #    continue
-        if not isExists:
-            #print('正在下载第' + str(i) + '个')
-            urllib.request.urlretrieve(urlList,filename=path+urlName)
-        else:
-            #print('文件已存在')
-            pass
+        try:
+           if not isExists:
+               print('正在下载第' + str(i) + '个')
+               urllib.request.urlretrieve(urlList,filename=path+urlName)
+           else:
+               print('文件已存在')
+               pass
+        except:
+           continue
 
     #判断是否下载完全
     l = 0
@@ -61,7 +55,7 @@ def download():
 if __name__ == "__main__":
     
     #创建文件夹
-    make_path=".\\pdb\\pdb_zip"
+    make_path=".\\pdb\\pdb_zip_APS"
     spider.makedir(make_path)
     #下载
     download()
