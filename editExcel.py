@@ -2,7 +2,7 @@ import xlrd
 from xlutils.copy import copy 
 from progressbar import ProgressBar
 
-data = xlrd.open_workbook('PDB_Excel_Diamond.xls',formatting_info=True)
+data = xlrd.open_workbook('PDB_Excel_APS.xls',formatting_info=True)
 excel = copy(wb=data) # 完成xlrd对象向xlwt对象转换
 excel_table = excel.get_sheet(0) # 获得要操作的页
 
@@ -47,4 +47,4 @@ for i in pbar(range(nrows)):
             source = table.cell(i,10).value
             excel_table.write(i,20,source)
 
-excel.save('PDB_Excel_Diamond.xls')
+excel.save('PDB_Excel_APS.xls')

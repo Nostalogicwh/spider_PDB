@@ -64,12 +64,12 @@ def getDetails(i,DOI):
         excel_table.write(i,9,JCR_part)
 
         excel_table.write(i,10,'Web of Science')
-        excel.save('PDB_Excel_Diamond.xls')
+        excel.save('PDB_Excel_APS.xls')
     except:
         #Title
         print('NoIF')
         excel_table.write(i,10,'Letpub')
-        excel.save('PDB_Excel_Diamond.xls')
+        excel.save('PDB_Excel_APS.xls')
 
 
 #获取DOI
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     driver.find_element_by_xpath('/html/body/span[27]/span/span[1]/input').send_keys(Keys.ENTER)
 
 
-    data = xlrd.open_workbook('PDB_Excel_Diamond.xls',formatting_info=True)
+    data = xlrd.open_workbook('PDB_Excel_APS.xls',formatting_info=True)
     excel = copy(wb=data) # 完成xlrd对象向xlwt对象转换
     excel_table = excel.get_sheet(0) # 获得要操作的页
 
@@ -158,4 +158,4 @@ if __name__ == '__main__':
     #         continue
     
 
-    excel.save('PDB_Excel_Diamond.xls')
+    excel.save('PDB_Excel_APS.xls')
